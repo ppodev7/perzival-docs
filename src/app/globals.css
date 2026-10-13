@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Perzival — tema "sala escura".
+ * Quase preto com um fio de violeta; superfícies sobem poucos pontos de luz.
+ * O gradiente roxo ("aura") é reservado para onde a IA age: gravar, documentar, regerar.
+ */
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.145 0.008 295);
+  --foreground: oklch(0.965 0.004 295);
+  --card: oklch(0.175 0.01 295);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.205 0.012 295);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.6 0.2 292);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.215 0.012 295);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.205 0.01 295);
+  --muted-foreground: oklch(0.7 0.014 295);
+  --faint-foreground: oklch(0.56 0.012 295);
+  --accent: oklch(0.235 0.018 295);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.64 0.18 22);
+  --success: oklch(0.74 0.12 160);
+  --border: oklch(1 0 0 / 7%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.6 0.2 292);
+
+  /* aura: o gradiente da IA */
+  --aura-from: #7c3aed;
+  --aura-via: #9d4edd;
+  --aura-to: #c026d3;
+  --aura-glow: rgb(139 92 246 / 0.45);
+  --aura-ink: oklch(0.84 0.09 300);
+}
+
+@theme inline {
+  --font-sans: var(--font-onest);
+  --font-mono: var(--font-jetbrains);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-faint-foreground: var(--faint-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-aura-ink: var(--aura-ink);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+}
+
+@utility aura-fill {
+  background-image: linear-gradient(135deg, var(--aura-from), var(--aura-via) 55%, var(--aura-to));
+}
+
+@utility aura-soft {
+  background-image: linear-gradient(135deg, rgb(124 58 237 / 0.2), rgb(192 38 211 / 0.14));
+}
+
+@utility aura-text {
+  background-image: linear-gradient(135deg, #a78bfa, #e879f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility aura-ring {
+  box-shadow: 0 0 0 1px rgb(167 139 250 / 0.35), 0 0 24px -4px var(--aura-glow);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@utility rec-dot {
+  animation: pulse-dot 1.6s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rec-dot { animation: none; }
+}
