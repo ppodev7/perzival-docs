@@ -10,9 +10,13 @@ Integrações e Conta. Next.js + React + Tailwind + componentes shadcn/ui, tema 
 ## Rodando
 ```bash
 npm install
-npm run dev        # http://localhost:3000
-./scripts/export-mockup.sh   # versão estática em out/
+npm run dev        # app em http://localhost:3000
+                   # mockup em um único HTML: http://localhost:3000/mockup.html
+npm run mockup:html   # regenera public/mockup.html depois de mudar as telas
 ```
+
+`public/mockup.html` tem tudo embutido (CSS, JavaScript e fontes), então também abre direto no navegador,
+com dois cliques, sem servidor.
 
 ## Branches
 - `main`: versão estável
